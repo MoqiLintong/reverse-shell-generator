@@ -162,7 +162,18 @@ const rsg = {
             window.clipboardData.setData('Text', text);
             $('#clipboard-toast').toast('show')
         } else {
-            $('#clipboard-failure-toast').toast('show')
+            // HTTP 环境下启用"复制到剪贴板"功能
+            try {
+                const input = document.createElement('input');
+                input.value = text;
+                document.body.appendChild(input);
+                input.select();
+                document.execCommand('copy');
+                document.body.removeChild(input);
+                $('#clipboard-toast').toast('show')
+            } catch(error) {
+                $('#clipboard-failure-toast').toast('show')
+            }
         }
     },
 
