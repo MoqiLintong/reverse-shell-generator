@@ -41,7 +41,7 @@ Simply run the following commands within this repository to spin up the instance
 ```
 docker build -t reverse_shell_generator .
 
-docker run -d -p 80:80 reverse_shell_generator
+docker run -d -p 80:8888 --restart=always reverse_shell_generator
 ```
 
 Browse to http://localhost:80
